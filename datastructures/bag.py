@@ -4,25 +4,58 @@ from datastructures.ibag import IBag, T
 
 class Bag(IBag[T]):
     def __init__(self, *items: Optional[Iterable[T]]) -> None:
-        raise NotImplementedError("__init__ method not implemented")
+        self.contents = {}
+        for item in items:
+            if item == None:
+                raise TypeError("added none item")
+            elif item not in self.contents:
+                self.contents[item]=1 
+            else:
+                self.contents[item] += 1
 
     def add(self, item: T) -> None:
-        raise NotImplementedError("add method not implemented")
+        if item == None:
+            raise TypeError("added None Item")
+        elif item not in self.contents:
+            self.contents[item]= 1 
+        else:
+            self.contents[item] += 1
+
 
     def remove(self, item: T) -> None:
-        raise NotImplementedError("remove method not implemented")
+        if item not in self.contents or item== None:
+            raise ValueError("item not in bag")
+        if item in self.contents:
+            self.contents[item] -=1
+
+        
 
     def count(self, item: T) -> int:
-        raise NotImplementedError("count method not implemented")
+        try:
+            return(self.contents[item])
+        except: 
+            if item == None:
+                raise TypeError("counted none item")
+            if item not in self.contents:
+                return 0
 
     def __len__(self) -> int:
-        raise NotImplementedError("__len__ method not implemented")
+        total=0
+        for item in self.contents:
+            total+= self.contents[item]
+        return total
 
     def distinct_items(self) -> int:
-        raise NotImplementedError("distinct_items method not implemented")
+        return list(self.contents.keys())
 
     def __contains__(self, item) -> bool:
-        raise NotImplementedError("__contains__ method not implemented")
+        if item in self.contents:
+            return True 
+        else: 
+            return False 
 
     def clear(self) -> None:
-        raise NotImplementedError("clear method not implemented")
+        self.contents={}
+
+
+    
