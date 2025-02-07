@@ -22,9 +22,12 @@ class IArray(Sequence[T], Generic[T], ABC):
     """   
 
     @abstractmethod
-    def __init__(self, starting_sequence: Sequence[T], data_type: type=object) -> None:
-        """ Array Constructor. Initializes the Array with a default capacity (default: 0) and default value (default: None).
-            The Array should manage a physical size (the size of the internal numpy array) and a logical size (the number of items in the Array).
+    def __init__(self, starting_sequence: Sequence[T]=[], data_type: type=object) -> None:
+        """ Array Constructor. Initializes the Array using a Sequence type (anything that supports the bracket operator like a Python list).
+            The Sequence should contain elements of the same type specified by the second parameter data_type.
+            The underlying structure in the Array must be a NumPy Array.
+            Internally, the Array should also manage a physical size (the size of the internal numpy array) and a logical size (the number of 
+            items in the Array).
 
         Examples:
             >>> array = Array[int](starting_sequence=[], data_type=int)

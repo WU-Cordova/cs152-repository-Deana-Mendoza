@@ -26,7 +26,7 @@ class Array(IArray[T]):
     @overload
     def __getitem__(self, index: slice) -> Sequence[T]: ...
     def __getitem__(self, index: int | slice) -> T | Sequence[T]:
-            raise NotImplementedError('Indexing not implemented.')
+        raise NotImplementedError('Indexing not implemented.')
     
     def __setitem__(self, index: int, item: T) -> None:
         raise NotImplementedError('Indexing not implemented.')
@@ -56,7 +56,7 @@ class Array(IArray[T]):
         raise
 
     def __delitem__(self, index: int) -> None:
-       raise NotImplementedError('Delete not implemented.')
+        raise NotImplementedError('Delete not implemented.')
 
     def __contains__(self, item: Any) -> bool:
         raise NotImplementedError('Contains not implemented.')
