@@ -4,8 +4,6 @@ from datastructures.array import Array
 
 from tests.car import Car, Color, Make, Model
 
-@suite_weight(1.0)
-@suite_name('Array Test Suite')
 class TestArray:
     car1 = Car('123', Color.RED, Make.TOYOTA, Model.CAMRY)
     car2 = Car('456', Color.BLUE, Make.TOYOTA, Model.CIVIC)
