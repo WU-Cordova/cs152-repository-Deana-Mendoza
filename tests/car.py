@@ -12,7 +12,7 @@ class Color(Enum):
     GREEN = 3
     BLACK = 4
     WHITE = 5
-
+    
 class Make(Enum):
     """An enumeration to represent the make of a car. 
         The enumeration is provided as an example of a simple object that can be used to test with your data structures.

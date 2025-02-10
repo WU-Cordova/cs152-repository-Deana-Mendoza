@@ -12,23 +12,29 @@ class Game:
         self.__player2 = player2
 
     def attack(self, attacker: Character, defender: Character):
-        """Performs an attack where an attacker rolls a die to determine damage dealt"""
-        turn_counter=1
+        """Performs an attack where an attacker rolls a die to determine damage dealt \n
+        attacker's attack power damage enhanced by multiplier"""
 
-        if turn_counter %2 !=0:
-            attacker=self.__player1
-            defender=self.__player2
-        else:
-            attacker=self.__player2
-            defender=self.__player1
-
-        Roll_values=[1,2,3,4,5,6]
-        random_roll=random.choice(Roll_values)
-        defender.health= defender.health-(attacker.attack_power*random_roll)
-        print(defender.health)
-        
+        damage_multiplier=random.randint(1,6)
+        attacker_damage=attacker.attack_power*damage_multiplier
+        defender.health-=attacker_damage
+        print(f"{attacker.name} deals {defender.name} {attacker_damage} damage! ")
+        print(f"{defender.name} now has {max(0, defender.health)} health remaining.")
 
     def start_battle(self):
         """Starts a turn based battle loop where the players take turns attacking"""
-        while self.__player1.health and self.__player2.health 0:
-            self.attack()
+        print(f"BATTLE START: {self.__player1} VS {self.__player2}")
+        turn_counter: int = 0
+
+        while self.__player1.health and self.__player2.health > 0:
+
+            if turn_counter % 2 == 0:
+                self.attack(self.__player1,self.__player2)
+            else:
+                self.attack(self.__player2,self.__player1)
+
+            turn_counter += 1
+
+        game_winner: Character = self.__player1 if self.__player1.health > 0 else self.__player2
+
+        print(f"{game_winner.name} is the winner!")
