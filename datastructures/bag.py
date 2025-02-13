@@ -27,6 +27,8 @@ class Bag(IBag[T]):
             raise ValueError("item not in bag")
         if item in self.contents:
             self.contents[item] -=1
+        if self.contents[item] == 0:
+            del self.contents[item]
 
         
 

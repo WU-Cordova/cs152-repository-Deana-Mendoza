@@ -14,7 +14,7 @@ class IBag(ABC, Generic[T]): #ABC is a parent class, generic will allow to creat
         Initializes the Bag.
         """
         pass
-    
+        
     @abstractmethod
     def add(self, item: T) -> None: #whatever type is set for T early on
         """
