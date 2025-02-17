@@ -24,11 +24,11 @@ class IArray(Sequence[T], Generic[T], ABC):
     @abstractmethod
     def __init__(self, starting_sequence: Sequence[T]=[], data_type: type=object) -> None:
         """ Array Constructor. Initializes the Array using a Sequence type (anything that supports the bracket operator like a Python list).
-            The Sequence should contain elements of the same type specified by the second parameter data_type.
-            The underlying structure in the Array must be a NumPy Array.
-            Internally, the Array should also manage a physical size (the size of the internal numpy array) and a logical size (the number of 
-            items in the Array).
-
+                The Sequence should contain elements of the same type specified by the second parameter data_type.
+                The underlying structure in the Array must be a NumPy Array.
+                Internally, the Array should also manage a physical size (the size of the internal numpy array) and a logical size (the number of 
+                items in the Array).
+        
         Examples:
             >>> array = Array[int](starting_sequence=[], data_type=int)
             >>> print(repr(array))
@@ -138,6 +138,7 @@ class IArray(Sequence[T], Generic[T], ABC):
             Array(logical size: 10, items: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], physical size: 16, data type: <class 'int'>)
     Args:
         data (T): the desired data to append.
+        
     Returns:
         None
     """
@@ -169,6 +170,7 @@ class IArray(Sequence[T], Generic[T], ABC):
             
         Args:
             data (T): the desired data to append.
+
         Returns:
             None
         """
@@ -270,6 +272,7 @@ class IArray(Sequence[T], Generic[T], ABC):
     @abstractmethod
     def __iter__(self) -> Iterator[T]:
         """ Iterator operator. Allows for iteration over the Array.
+        
         Examples:
             >>> array = Array[str](starting_sequence=['one', 'two', 'three', 'four', 'five'], data_type=str)
             >>> for item in array: # invokes __iter__
@@ -284,6 +287,7 @@ class IArray(Sequence[T], Generic[T], ABC):
     @abstractmethod
     def __reversed__(self) -> Iterator[T]:
         """ Reversed iterator operator. Allows for iteration over the Array in reverse.
+        
         Examples:
             >>> array = Array[str](starting_sequence=['one', 'two', 'three', 'four', 'five'], data_type=str)
             >>> for item in reversed(array):
@@ -347,7 +351,7 @@ class IArray(Sequence[T], Generic[T], ABC):
             Array(logical size: 10, items: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], physical size: 10, data type: <class 'int'>)
             >>> array.clear()
             >>> print(repr(array))
-            Array(logical size: 0, items: [], physical size: 10, data type: <class 'int'>)
+            Array(logical size: 0, items: [], physical size: 0, data type: <class 'int'>)
             
         Returns:
             None
