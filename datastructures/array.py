@@ -21,7 +21,7 @@ class Array(IArray[T]):
     def __init__(self, starting_sequence: Sequence[T]=[], data_type: type=object) -> None: 
         if not isinstance(starting_sequence, Sequence):
             raise ValueError("starting_sequence must be a sequence type (e.g., list, tuple).")
-        if not all(isinstance(item, data_type) for item in starting_sequence):
+        if not all(item is None or isinstance(item, data_type) for item in starting_sequence):
             raise TypeError(f"All elements in starting_sequence must be of type {data_type.__name__}.")
         self.data_type = data_type
         self.logical_size = len(starting_sequence)  
