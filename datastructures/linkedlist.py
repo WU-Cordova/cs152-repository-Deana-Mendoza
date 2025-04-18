@@ -24,14 +24,19 @@ class LinkedList[T](ILinkedList[T]):
     def from_sequence(sequence: Sequence[T], data_type: type=object) -> LinkedList[T]:
         llist = LinkedList(data_type=data_type)   #static method so it doesnt reference self 
         for item in sequence:
+            if not isinstance(item,data_type):
+                raise TypeError ("Wrong data type")
             llist.append(item)
         return llist
 
     def append(self, item: T) -> None:
-        node = LinkedList.Node(data = item) 
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")
+        node = LinkedList.Node(data = item)
+
         if self.empty:
             self.head = self.tail = node
-        if not self.empty:
+        else:     #if not self.empty:
 		#set nodes previous to current tail
             node.previous = self.tail
 		#set tail next to new node
@@ -40,10 +45,13 @@ class LinkedList[T](ILinkedList[T]):
 		#set tail to new node 
             self.tail = node
         self.count+=1
-        return self.count 
+
 
     def prepend(self, item: T) -> None:
         new_node = LinkedList.Node (data = item)
+
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")
         new_node.next = self.head 
         if self.head:
             self.head.previous = new_node
@@ -56,10 +64,14 @@ class LinkedList[T](ILinkedList[T]):
             if travel.data == target:
                 break 
             travel = travel.next
-
+        if not isinstance(target, self.data_type):
+            raise TypeError("Wrong data type for target")        
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")
         if travel is None:
             raise ValueError(f"the target was not found")
         
+
         if travel is self.head:
             self.prepend(item)
             return 
@@ -73,6 +85,10 @@ class LinkedList[T](ILinkedList[T]):
         self.count += 1
 
     def insert_after(self, target: T, item: T) -> None:
+        if not isinstance(target, self.data_type):
+            raise TypeError("Wrong data type for target")            
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")         
         travel = self.head 
         while travel:
             if travel.data == target:
@@ -81,7 +97,7 @@ class LinkedList[T](ILinkedList[T]):
 
         if travel is None:
             raise ValueError(f"the target was not found")
-        
+       
         if travel is self.tail:
             self.append(item)
             return 
@@ -95,8 +111,10 @@ class LinkedList[T](ILinkedList[T]):
         self.count += 1
 
     def remove(self, item: T) -> None:
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")        
         travel = self.head 
-
+        
         while travel:
             if travel.data == item:
                 break 
@@ -125,7 +143,8 @@ class LinkedList[T](ILinkedList[T]):
 
     def remove_all(self, item: T) -> None:
         travel = self.head
-
+        if not isinstance(item,self.data_type):
+            raise TypeError ("Wrong data type")
         while travel:
             if travel.data == item:
                 if travel == self.head:
@@ -231,22 +250,24 @@ class LinkedList[T](ILinkedList[T]):
 
             travel=travel.previous 
     
-    def __eq__(self, other: object) -> bool:        
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, LinkedList):
+            return False
+
+        if self.count != other.count:
+            return False 
+        
+
         travel = self.head 
         current = other.head 
 
-        travel_data=travel.data
-        current_data= current.data 
-
-        while travel is not None:
-            if self.count != other.count:
-                pass
-            if travel_data != current_data:
-                break 
+        while travel is not None and current is not None:
+            if travel.data != current.data:
+                 return False
             else:
                 travel = travel.next 
                 current = current.next  
-        pass     
+        return True 
 
 
     def __str__(self) -> str:
