@@ -43,7 +43,9 @@ class LinkedList[T](ILinkedList[T]):
             if self.tail:
                 self.tail.next = node 	
 		#set tail to new node 
+            
             self.tail = node
+            
         self.count+=1
 
 
@@ -56,6 +58,7 @@ class LinkedList[T](ILinkedList[T]):
         if self.head:
             self.head.previous = new_node
         self.head = new_node
+        self.tail = new_node
         self.count += 1
 
     def insert_before(self, target: T, item: T) -> None:
