@@ -34,7 +34,9 @@ class ArrayStack(IStack[T]):
             Arguments:
                 item: T -- The item to push onto the stack.
         '''
-        raise NotImplementedError
+        if self.maxsize == max_size:
+            pass
+
 
     def pop(self) -> T:
         ''' Pops an item from the stack.
